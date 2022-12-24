@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 3645524799030188896}
   - component: {fileID: 3645524799030188895}
   - component: {fileID: 3275152110814308506}
-  - component: {fileID: 3645524799030188897}
+  - component: {fileID: 2077339144775127827}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -183,7 +183,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.08
---- !u!114 &3645524799030188897
+--- !u!114 &2077339144775127827
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -196,7 +196,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody2D: {fileID: 3645524799030188896}
+  _interactiveCollider: {fileID: 3645524799030188895}
   _movementSpeed: 10
-  OnDialogueEvent:
-    m_PersistentCalls:
-      m_Calls: []
