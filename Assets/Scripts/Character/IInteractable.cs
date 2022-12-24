@@ -1,6 +1,6 @@
 ﻿namespace BGS.Character
 {
-    internal interface IInteractable
+    public interface IInteractable
     {
         void Interact();
     }

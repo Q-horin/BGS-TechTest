@@ -1,4 +1,7 @@
 using UnityEngine;
+using UnityEngine.Events;
+using BGS.DialogueSystem;
+using BGS.Character;
 
 namespace BGS.Control
 {
@@ -6,13 +9,35 @@ namespace BGS.Control
     public class CharacterController : MonoBehaviour
     {
         [SerializeField] private Rigidbody2D _rigidbody2D;
+        [SerializeField] private Collider2D _interactiveCollider;
         [SerializeField] private float _movementSpeed;
 
+        private IInteractable _interactable;
         private Vector2 _moveDir;
         float _xValue;
         float _yValue;
 
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+             if (!collision.gameObject.TryGetComponent<IInteractable>(out IInteractable interactable)) { return; }
+             _interactable = interactable;
+        }
+
+        private void OnCollisionExit2D(Collision2D collision)
+        {
+            _interactable = null;
+        }
         void Update()
+        {
+            HandleMovementInput();
+            if (Input.GetKey(KeyCode.E))
+            {
+                if (_interactable == null) { return; }
+                _interactable.Interact();
+            }
+        }
+
+        private void HandleMovementInput()
         {
             _xValue = 0f;
             _yValue = 0f;

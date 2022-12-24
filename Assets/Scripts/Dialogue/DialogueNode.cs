@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BGS.Dialogue
+namespace BGS.DialogueSystem
 {
     [System.Serializable]
     public class DialogueNode
     {
         [SerializeField] public string ID;
-        [TextArea(5,5)]
-        [SerializeField] private string _text;
-        [SerializeField] private string[] childNodes;
+        [TextArea(3, 3)]
+        [SerializeField] public string _text;
+        [SerializeField] public string[] childNodes;
     }
 }
 //EOF.

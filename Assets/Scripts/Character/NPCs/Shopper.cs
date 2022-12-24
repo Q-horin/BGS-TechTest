@@ -8,7 +8,7 @@ namespace BGS.Character
     {
         public override void Interact()
         {
-            Debug.Log("This is the shopper interacting");
+            base.Interact();
         }
     }
 }

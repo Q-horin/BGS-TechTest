@@ -1,24 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BGS.DialogueSystem;
+
 
 namespace BGS.Character
 {
     public abstract class NPC : MonoBehaviour, IInteractable
     {
-        [SerializeField] private Collider2D _interactionCollider;
+        [SerializeField] private Dialogue _dialogue;
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void Start()
         {
-            if (collision.gameObject.tag == "Player")
-            {
-                Interact();
-            }
+            
         }
-
         public virtual void Interact()
         {
-            Debug.Log("Base NPC interacting");
+            DialogueManager.Instance.HandleDialogue(_dialogue);
+            //string currentDialogue = _dialogue._nodes[0]._text;
+            //Debug.Log(currentDialogue);
         }
     }
 }
