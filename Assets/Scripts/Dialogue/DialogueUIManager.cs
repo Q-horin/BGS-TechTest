@@ -16,6 +16,10 @@ namespace BGS.UI
             _dialogueText.text = dialogue;
         }
 
+        public void CloseDialogueUI()
+        {
+            EnableDialogueUI(false);
+        }
         public void EnableDialogueUI(bool enable)
         {
             this.gameObject.SetActive(enable);
