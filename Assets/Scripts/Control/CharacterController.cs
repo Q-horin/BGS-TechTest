@@ -30,6 +30,7 @@ namespace BGS.Control
         void Update()
         {
             HandleMovementInput();
+
             if (Input.GetKey(KeyCode.E))
             {
                 if (_interactable == null) { return; }
