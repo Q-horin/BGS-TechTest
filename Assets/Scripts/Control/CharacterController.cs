@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace BGS.Controller
+namespace BGS.Control
 {
     [RequireComponent(typeof(Rigidbody2D))]
     public class CharacterController : MonoBehaviour
