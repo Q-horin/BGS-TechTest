@@ -14,13 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _nodes:
   - ID: a
-    _text: Welcome to my shop, would you like to buy some clothes?
-    childNodes:
-    - b
-    - c
-  - ID: b
-    _text: Yes
-    childNodes: []
-  - ID: c
-    _text: No
-    childNodes: []
+    _text: Welcome to my shop, would you like to buy some items?
+    DialogueActions:
+    - Text: Yes
+      _needsResponse: 1
+      _endsDialogue: 1
+    - Text: No
+      _needsResponse: 0
+      _endsDialogue: 1

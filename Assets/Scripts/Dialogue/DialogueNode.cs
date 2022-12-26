@@ -10,7 +10,7 @@ namespace BGS.DialogueSystem
         [SerializeField] public string ID;
         [TextArea(3, 3)]
         [SerializeField] public string _text;
-        [SerializeField] public string[] childNodes;
+        [SerializeField] public List<DialogueAction> DialogueActions;
     }
 }
 //EOF.
