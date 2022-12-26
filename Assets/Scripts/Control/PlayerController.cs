@@ -3,10 +3,10 @@ using UnityEngine.Events;
 using BGS.DialogueSystem;
 using BGS.Character;
 
-namespace BGS.Control
+namespace BGS.Core
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class CharacterController : MonoBehaviour
+    public class PlayerController : MonoBehaviour
     {
         [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private Collider2D _interactiveCollider;

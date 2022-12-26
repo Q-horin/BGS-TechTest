@@ -34,6 +34,8 @@ namespace BGS.DialogueSystem
             _dialogueUI.EnableDialogueUI(true);
             _dialogueUI.SetDialogueText(dialogue._nodes[0]._text);
 
+            if (dialogue._nodes[0].DialogueActions.Count == 0) { return; }
+
             responses = dialogue._nodes[0].DialogueActions;
             
             foreach ( var response in responses)

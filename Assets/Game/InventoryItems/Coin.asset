@@ -15,3 +15,5 @@ MonoBehaviour:
   Sprite: {fileID: 21300000, guid: d6032d13c4ee8c441b8173423b65deb2, type: 3}
   Name: Coin
   EquipLocation: 1
+  Value: 200
+  Description: 

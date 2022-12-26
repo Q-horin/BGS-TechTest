@@ -15,8 +15,6 @@ namespace BGS.Inventory
 
         public Func<InventoryItem, bool> ItemEquippedEvent;
         public event Action ItemEquippedSuccessfully;
-
-
         
         public int InventorySize => _inventorySize;
         private void Awake()
@@ -42,9 +40,12 @@ namespace BGS.Inventory
             return true;
         }
 
+        public void RemoveItemFromInventory(InventorySlot slot)
+        {
+            _inventoryUIManager.RemoveItemFromInventory(slot);
+        }
         public void ItemEquipped(InventoryItem item)
         {
-            //ItemEquippedEvent?.Invoke(item);
             if (ItemEquippedEvent == null) { return; }
             if (ItemEquippedEvent(item))
             {
@@ -57,12 +58,20 @@ namespace BGS.Inventory
             List<InventorySlot> slots = _inventoryUIManager.CurrentInventory;
             foreach (var slot in slots)
             {
-                Debug.Log("jijij");
                 if (!slot.IsChildActive) { return true; }
             }
             return false;
         }
 
+        public InventoryItem GetSelectedItemInInventory()
+        {
+            return _inventoryUIManager.SelectedItem;
+        }
+
+        public InventorySlot GetSelectedSlotInInventory()
+        {
+            return _inventoryUIManager.SelectedSlot;
+        }
     }
 }
 //EOF.

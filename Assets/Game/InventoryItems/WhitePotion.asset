@@ -15,3 +15,5 @@ MonoBehaviour:
   Sprite: {fileID: 21300000, guid: cbee6a5e7ce462a489ba4a33a6291344, type: 3}
   Name: White Potion
   EquipLocation: 1
+  Value: 25
+  Description: 

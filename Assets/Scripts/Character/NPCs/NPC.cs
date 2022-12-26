@@ -12,7 +12,6 @@ namespace BGS.Character
 
         public virtual void HandleResponse(DialogueAction action)
         {
-            
         }
 
         public virtual void Interact()

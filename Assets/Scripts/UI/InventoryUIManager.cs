@@ -17,6 +17,7 @@ namespace BGS.UI
         private List<InventorySlot> _inventorySlots = new List<InventorySlot>();
         public List<InventorySlot> CurrentInventory => _inventorySlots;
 
+
         private void OnEnable()
         {
             InventoryManager.Instance.ItemEquippedSuccessfully += OnItemEquippedSuccessfully;
@@ -31,8 +32,10 @@ namespace BGS.UI
         {
             for (int i = 0; i < inventorySize; i++)
             {
-                GameObject slot = Instantiate(_inventorySlotPrefab, _inventorySlotParent);
-                _inventorySlots.Add(slot.GetComponent<InventorySlot>());
+                GameObject go = Instantiate(_inventorySlotPrefab, _inventorySlotParent);
+                var slot = go.GetComponent<InventorySlot>();
+                slot.SetUIManager(this);
+                _inventorySlots.Add(slot);
             }
         }
 
@@ -46,9 +49,16 @@ namespace BGS.UI
                 break;
             }
         }
+
+        public void RemoveItemFromInventory(InventorySlot slot)
+        {
+            var item = _inventorySlots.Find(x => x.InventoryItem.Name.Equals(slot.InventoryItem.Name));
+            item.UnsetInventoryItem();
+            UnSelectInventoryItem();
+        }
         private void OnItemEquippedSuccessfully()
         {
-            Debug.Log("Closing UI Shit");
+            //Debug.Log("Closing UI Shit");
         }
 
         public void HandleEquipment()
@@ -56,11 +66,7 @@ namespace BGS.UI
             if (_selectedInventoryItem == null) { return; }
             Debug.Log("handling equipment");
             InventoryManager.Instance.ItemEquipped(_selectedInventoryItem);
-        }
-    
-        public override void SetSelectedInventoryItem(InventoryItem inventoryItem)
-        {
-            _selectedInventoryItem = inventoryItem;
+            UnSelectInventoryItem();
         }
 
         public void CloseUI()
