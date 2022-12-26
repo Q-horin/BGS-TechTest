@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BGS.UI;
-
+using System;
+using BGS.Character;
 namespace BGS.DialogueSystem
 {
     public class DialogueManager : MonoBehaviour
@@ -10,6 +11,10 @@ namespace BGS.DialogueSystem
         public static DialogueManager Instance { get; private set; }
 
         [SerializeField] private DialogueUIManager _dialogueUI;
+        private NPC _transmitter;
+        private List<DialogueAction> responses = new List<DialogueAction>();
+        private bool _interacting = false;
+        public bool Interacting => _interacting;
 
         private void Awake()
         {
@@ -22,10 +27,38 @@ namespace BGS.DialogueSystem
                 Instance = this;
             }
         }
-        public void HandleDialogue(Dialogue dialogue)
+        public void HandleDialogue(Dialogue dialogue, NPC transmitter)
         {
+            _interacting = true;
+            _transmitter = transmitter;
             _dialogueUI.EnableDialogueUI(true);
             _dialogueUI.SetDialogueText(dialogue._nodes[0]._text);
+
+            responses = dialogue._nodes[0].DialogueActions;
+            
+            foreach ( var response in responses)
+            {
+                _dialogueUI.CreateResponseButton(response);
+            }
+        }
+    
+        public void HandleDialogueResponse(DialogueAction action)
+        {
+            _transmitter.HandleResponse(action);
+            if (action.EndsDialogue)
+            {
+                CloseDialogue();
+            }
+        }
+
+        public void HandleDialogueUIClosure()
+        {
+            _interacting = false;
+        }
+
+        private void CloseDialogue()
+        {
+            _dialogueUI.HandleDialogueClosure();
         }
     }
 }

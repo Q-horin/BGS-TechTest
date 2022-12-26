@@ -9,7 +9,7 @@ namespace BGS.Inventory
     {
         [SerializeField] private GameObject _childInventoryItem;
         [SerializeField] private Image _childSpriteRenderer;
-        private InventoryUIManager _inventoryUIManager;
+        private UIManager _UIManager;
 
         private InventoryItem _inventoryItem;
         public bool IsChildActive { get; private set; }
@@ -37,12 +37,10 @@ namespace BGS.Inventory
         public void OnPointerClick(PointerEventData eventData)
         {
             if(_inventoryItem == null) { return; }
-            _inventoryUIManager = FindObjectOfType<InventoryUIManager>();
-            _inventoryUIManager.SetSelectedInventoryItem(_inventoryItem);
+            _UIManager = FindObjectOfType<UIManager>();
+            _UIManager.SetSelectedInventoryItem(_inventoryItem);
             Debug.Log("Setting inventory item as it was clicked");
         }
-
-        // _inventoryUIManager = GetComponent<InventoryUIManager>();
     }
 
 }

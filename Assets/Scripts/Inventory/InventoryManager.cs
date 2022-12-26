@@ -1,17 +1,24 @@
 using System;
 using UnityEngine;
 using BGS.UI;
+using System.Collections.Generic;
 
 namespace BGS.Inventory
 {
     public class InventoryManager : MonoBehaviour
     {
         public static InventoryManager Instance { get; private set; }
-        //public event Action<InventoryItem> ItemEquippedEvent;
+
+        [Range(1, 6)]
+        [SerializeField] private int _inventorySize;
+        [SerializeField] private InventoryUIManager _inventoryUIManager;
+
         public Func<InventoryItem, bool> ItemEquippedEvent;
         public event Action ItemEquippedSuccessfully;
 
 
+        
+        public int InventorySize => _inventorySize;
         private void Awake()
         {
             if (Instance != null && Instance != this)
@@ -24,6 +31,17 @@ namespace BGS.Inventory
             }
         }
 
+        public bool AddItemToInventory(InventoryItem item)
+        {
+            if (!AvailableSpaceInInventory())
+            {
+                Debug.Log("Not enough space");
+                return false;
+            }
+            _inventoryUIManager.AddItemToInventory(item);
+            return true;
+        }
+
         public void ItemEquipped(InventoryItem item)
         {
             //ItemEquippedEvent?.Invoke(item);
@@ -32,6 +50,17 @@ namespace BGS.Inventory
             {
                 ItemEquippedSuccessfully?.Invoke();
             }
+        }
+
+        private bool AvailableSpaceInInventory()
+        {
+            List<InventorySlot> slots = _inventoryUIManager.CurrentInventory;
+            foreach (var slot in slots)
+            {
+                Debug.Log("jijij");
+                if (!slot.IsChildActive) { return true; }
+            }
+            return false;
         }
 
     }

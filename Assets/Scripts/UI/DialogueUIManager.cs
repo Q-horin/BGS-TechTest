@@ -3,24 +3,42 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using BGS.DialogueSystem;
 
 namespace BGS.UI
 {
     public class DialogueUIManager : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _dialogueText;
-        [SerializeField] private Button[] _dialogueButtons;
         [SerializeField] private GameObject _uiContainer;
-        
+        [SerializeField] private Transform _buttonsHolder;
+        [SerializeField] private GameObject _buttonPrefab;
+
         public void SetDialogueText(string dialogue)
         {
             _dialogueText.text = dialogue;
         }
 
-        public void CloseUI()
+        public void CreateResponseButton(DialogueAction response)
         {
-            EnableDialogueUI(false);
+            GameObject go = Instantiate(_buttonPrefab, _buttonsHolder);
+            go.GetComponent<DialogueButton>().InitConfiguration(response);
         }
+        public void HandleResponse(DialogueAction response)
+        {
+            DialogueManager.Instance.HandleDialogueResponse(response);
+        }
+
+        public void HandleDialogueClosure()
+        {
+            foreach (Transform child in _buttonsHolder)
+            {
+                Destroy(child.gameObject);
+            }
+            EnableDialogueUI(false);
+            DialogueManager.Instance.HandleDialogueUIClosure();
+        }
+
         public void EnableDialogueUI(bool enable)
         {
             _uiContainer.SetActive(enable);

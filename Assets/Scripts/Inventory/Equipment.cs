@@ -7,13 +7,11 @@ namespace BGS.Inventory
     public class Equipment : MonoBehaviour
     {
         [SerializeField] private GameObject _player;
-        [SerializeField] private InventoryManager inventory;
         private Dictionary<EquipLocation, GameObject> _equipLocationDict;
 
         private void OnEnable()
         {
-            //InventoryManager.Instance.ItemEquippedEvent += OnItemEquipped;
-            inventory.ItemEquippedEvent += OnItemEquipped;
+            InventoryManager.Instance.ItemEquippedEvent += OnItemEquipped;
         }
 
         private void Start()
