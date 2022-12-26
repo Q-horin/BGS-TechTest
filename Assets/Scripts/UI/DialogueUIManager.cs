@@ -17,7 +17,7 @@ namespace BGS.UI
             _dialogueText.text = dialogue;
         }
 
-        public void CloseDialogueUI()
+        public void CloseUI()
         {
             EnableDialogueUI(false);
         }

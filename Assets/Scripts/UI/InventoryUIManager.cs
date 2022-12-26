@@ -1,19 +1,46 @@
+using BGS.Inventory;
+using System;
 using UnityEngine;
 
 namespace BGS.UI
 {
-    public class InventoryUI : MonoBehaviour
+    public class InventoryUIManager : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        [SerializeField] private GameObject _uiContainer;
+        [SerializeField] private InventoryItem _item;
+        [SerializeField] private InventorySlot _slot;
+        [SerializeField] private InventoryManager _inventoryManager;
+        private InventoryItem _selectedInventoryItem;
+        private void Start()
         {
-
+            _slot.SetInvetoryItem(_item);
         }
 
-        // Update is called once per frame
-        void Update()
+        private void OnEnable()
         {
+            _inventoryManager.ItemEquippedSuccessfully += OnItemEquippedSuccessfully;
+        }
 
+        private void OnItemEquippedSuccessfully()
+        {
+            Debug.Log("Closing UI Shit");
+        }
+
+        public void HandleEquipment()
+        {
+            if (_selectedInventoryItem == null) { return; }
+            Debug.Log("handling equipment");
+            InventoryManager.Instance.ItemEquipped(_selectedInventoryItem);
+        }
+    
+        public void SetSelectedInventoryItem(InventoryItem inventoryItem)
+        {
+            _selectedInventoryItem = inventoryItem;
+        }
+
+        public void CloseUI()
+        {
+            _uiContainer.SetActive(false);
         }
     }
 }

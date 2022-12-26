@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35ec470977f96c144aaa28c703107492, type: 3}
   m_Name: Coin
   m_EditorClassIdentifier: 
-  MySprite: {fileID: 21300000, guid: eb634baf714d18041914974ad52d1f29, type: 3}
+  Sprite: {fileID: 21300000, guid: d6032d13c4ee8c441b8173423b65deb2, type: 3}
   Name: Coin
-  MyEquipLocation: 1
+  EquipLocation: 1
