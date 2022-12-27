@@ -15,3 +15,5 @@ MonoBehaviour:
   Sprite: {fileID: 21300000, guid: e6d1bfa7568106c4c823a4701cbe3180, type: 3}
   Name: Blue Potion
   EquipLocation: 1
+  Value: 100
+  Description: 

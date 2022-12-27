@@ -10,10 +10,13 @@ namespace BGS.Inventory
         [SerializeField] public Sprite Sprite;
         [SerializeField] public string Name;
         [SerializeField] public EquipLocation EquipLocation;
+        [SerializeField] public int Value;
+        [TextArea(3,3)]
+        [SerializeField] public string Description;
 
         public void OnEquip()
         {
-            throw new System.NotImplementedException();
+            Debug.Log($"Item {Name} equipped");
         }
     }
 }
