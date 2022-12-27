@@ -35,12 +35,18 @@ namespace BGS.Inventory
             _inventoryItem = null;
             IsChildActive = false;
             _childInventoryItem.SetActive(IsChildActive);
+            _UIManager.RemoveDescriptionText();
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
             if(_inventoryItem == null) { return; }
             if(_UIManager == null) { return; }
+            var uimanagers = FindObjectsOfType<UIManager>();
+            for (int i = 0; i < uimanagers.Length; i++)
+            {
+                uimanagers[i].UnSelectInventoryItem();
+            }
             _UIManager.SetSelectedInventoryItem(_inventoryItem, this);
             _UIManager.SetDescriptionText(_inventoryItem);
             Debug.Log("Setting inventory item as it was clicked");

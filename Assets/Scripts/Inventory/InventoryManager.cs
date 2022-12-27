@@ -49,6 +49,7 @@ namespace BGS.Inventory
             if (ItemEquippedEvent == null) { return; }
             if (ItemEquippedEvent(item))
             {
+                Debug.Log("Item successfully equiped");
                 ItemEquippedSuccessfully?.Invoke();
             }
         }

@@ -20,6 +20,7 @@ namespace BGS.UI
         private void PopulateShopItems(List<InventoryItem> items)
         {
             if (items.Count > _inventorySize) { return; }
+
             foreach (var item in items )
             {
                 GameObject go = Instantiate(_inventorySlotPrefab, _inventorySlotParent);
@@ -27,6 +28,17 @@ namespace BGS.UI
                 slot.SetInvetoryItem(item);
                 slot.SetUIManager(this);
                 _currentItemsInShop.Add(slot);
+            }
+
+            if (items.Count < _inventorySize)
+            {
+                int diff = _inventorySize - items.Count;
+                for (int i = 0; i < diff; i++)
+                {
+                    GameObject go = Instantiate(_inventorySlotPrefab, _inventorySlotParent);
+                    InventorySlot slot = go.GetComponent<InventorySlot>();
+                    _currentItemsInShop.Add(slot);
+                }
             }
         }
 
@@ -80,25 +92,25 @@ namespace BGS.UI
             //remove from shop
             RemoveFromShopInventory(_selectedInventoryItem);
             _shopper.OnItemSold(_selectedInventoryItem);
+
             UnSelectInventoryItem();
         }
 
         public void HandleSale()
         {
-            var item = InventoryManager.Instance.GetSelectedItemInInventory();
-            var slot = InventoryManager.Instance.GetSelectedSlotInInventory();
-
-            if ( item == null)
+            if (InventoryManager.Instance.GetSelectedItemInInventory() == null)
             {
                 Debug.Log("No object selected in inventory");
                 return;
             }
-            if (!_shopper.OnItemBought(item))
+            if (!_shopper.OnItemBought(InventoryManager.Instance.GetSelectedItemInInventory()))
             {
                 Debug.Log("Shopper could not buy");
+                return;
             }
-            InventoryManager.Instance.RemoveItemFromInventory(slot);
-            _player.AddToFunds(item.Value);
+            _player.AddToFunds(InventoryManager.Instance.GetSelectedItemInInventory().Value);
+            InventoryManager.Instance.RemoveItemFromInventory(InventoryManager.Instance.GetSelectedSlotInInventory());
+            
         }
         public void RemoveFromShopInventory(InventoryItem item)
         {

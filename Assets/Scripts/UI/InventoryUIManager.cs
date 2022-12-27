@@ -44,17 +44,24 @@ namespace BGS.UI
             foreach (var slot in _inventorySlots)
             {
                 if (slot.IsChildActive) { continue; }
-
                 slot.SetInvetoryItem(item);
+                Debug.Log("Added" + slot.InventoryItem.Name);
                 break;
             }
         }
 
         public void RemoveItemFromInventory(InventorySlot slot)
         {
-            var item = _inventorySlots.Find(x => x.InventoryItem.Name.Equals(slot.InventoryItem.Name));
-            item.UnsetInventoryItem();
-            UnSelectInventoryItem();
+            foreach(var inventoryslot in _inventorySlots)
+            {
+                if (!inventoryslot.IsChildActive) { continue; }
+                if (inventoryslot.InventoryItem.Name.Equals(slot.InventoryItem.Name))
+                {
+                    inventoryslot.UnsetInventoryItem();
+                    UnSelectInventoryItem();
+                    return;
+                }
+            }
         }
         private void OnItemEquippedSuccessfully()
         {

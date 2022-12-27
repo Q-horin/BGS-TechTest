@@ -24,6 +24,7 @@ namespace BGS.UI
         {
             _selectedInventoryItem = null;
             _selectedInventorySlot = null;
+            RemoveDescriptionText();
         }
         public void SetDescriptionText(InventoryItem item)
         {
@@ -31,6 +32,11 @@ namespace BGS.UI
             string l2 = item.Description;
 
             _descriptionText.text = l1 + l2;
+        }
+
+        public void RemoveDescriptionText()
+        {
+            _descriptionText.text = string.Empty;
         }
     }
 }
