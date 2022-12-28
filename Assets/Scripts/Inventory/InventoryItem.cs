@@ -13,6 +13,7 @@ namespace BGS.Inventory
         [SerializeField] public int Value;
         [TextArea(3,3)]
         [SerializeField] public string Description;
+        [SerializeField] public AnimatorOverrideController AnimatorOverrideController;
 
         public void OnEquip()
         {

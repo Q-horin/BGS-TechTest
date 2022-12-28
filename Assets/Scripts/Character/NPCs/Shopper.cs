@@ -17,27 +17,37 @@ namespace BGS.Character
         [SerializeField] private CurrencyController _currencyController;
         [SerializeField] private GameObject _hud;
         private bool _shopping;
+        private bool _interacting;
         public override void Interact()
         {
+            if (_interacting) { return; }
             if (_shopping) { return; }
             base.Interact();
             _hud.SetActive(false);
+            _interacting = true;
         }
 
         public override void ExitInteraction()
         {
             base.ExitInteraction();
             _hud.SetActive(false);
+            _interacting = false;
         }
 
         public override void PreInteraction()
         {
-            _hud.SetActive(true);
+            if (_interacting) 
+            {
+                _hud.SetActive(false);
+                return; 
+            }
+            _hud.SetActive(true);            
         }
 
         public override void HandleResponse(DialogueAction action)
         {
             if (!action.NeedsResponse) { return; }
+            _hud.SetActive(false);
             _shopUIManager = FindObjectOfType<ShopUIManager>();
 
             _shopUIManager.OpenShop(_shopItems, _inventorySize);
@@ -65,6 +75,7 @@ namespace BGS.Character
         public void ShopClosed()
         {
             _shopping = false;
+            _interacting = false;
         }
     }
 }

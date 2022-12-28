@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35ec470977f96c144aaa28c703107492, type: 3}
-  m_Name: RedPotion
+  m_Name: BlueShirt
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 21300000, guid: 40591bfc896615d46b132f70304353ed, type: 3}
-  Name: Red Potion
-  EquipLocation: 0
-  Value: 500
+  Sprite: {fileID: 21300000, guid: 03cc9fe331e970749917e6ef10a81b6f, type: 3}
+  Name: Blue T-shirt
+  EquipLocation: 1
+  Value: 50
   Description: 
-  AnimatorOverrideController: {fileID: 0}
+  AnimatorOverrideController: {fileID: 22100000, guid: 388af95a7d3cd5040b750e850acd3adf, type: 2}

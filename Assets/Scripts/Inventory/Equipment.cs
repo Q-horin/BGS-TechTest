@@ -1,3 +1,4 @@
+using BGS.Core;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,9 +7,10 @@ namespace BGS.Inventory
 {
     public class Equipment : MonoBehaviour
     {
-        [SerializeField] private GameObject _player;
+        [SerializeField] private PlayerController _player;
         private Dictionary<EquipLocation, GameObject> _equipLocationDict;
-
+        [SerializeField] private InventoryItem _equippedItem;
+        private List<InventoryItem> _itemsEquipped = new List<InventoryItem>();
         private void OnEnable()
         {
             InventoryManager.Instance.ItemEquippedEvent += OnItemEquipped;
@@ -16,11 +18,22 @@ namespace BGS.Inventory
 
         private void Start()
         {
-            //_equipLocationDict.Add(EquipLocation.Body, _player);
+            _itemsEquipped.Add(_equippedItem);
         }
         private bool OnItemEquipped(InventoryItem obj)
         {
             Debug.Log($"InvetoryItem: {obj.Name} was equipped");
+            if (obj.AnimatorOverrideController == null) { return true; }
+
+            for (int i = 0; i < _itemsEquipped.Count; i++)
+            {
+                if (_itemsEquipped[i].EquipLocation != obj.EquipLocation) { continue; }
+                InventoryManager.Instance.AddItemToInventory(_itemsEquipped[i]);
+                _itemsEquipped.RemoveAt(i);
+            }
+
+            _itemsEquipped.Add(obj);
+            _player.ReplaceRuntimeAnimatorController(obj.AnimatorOverrideController);
             return true;
         }
 

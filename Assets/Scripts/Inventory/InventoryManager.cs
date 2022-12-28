@@ -51,6 +51,7 @@ namespace BGS.Inventory
             {
                 Debug.Log("Item successfully equiped");
                 ItemEquippedSuccessfully?.Invoke();
+                RemoveItemFromInventory(GetSelectedSlotInInventory());
             }
         }
 
