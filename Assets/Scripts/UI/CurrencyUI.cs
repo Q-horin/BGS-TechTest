@@ -19,7 +19,8 @@ namespace BGS.UI
         
         public void SetFunds(int funds)
         {
-            _fundsText.text = funds.ToString();
+            string str = "$" + funds.ToString();
+            _fundsText.text = str;
         }
     }
 }

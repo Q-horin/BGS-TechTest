@@ -10,6 +10,10 @@ namespace BGS.Character
     {
         [SerializeField] private Dialogue _dialogue;
 
+        public virtual void ExitInteraction()
+        {
+        }
+
         public virtual void HandleResponse(DialogueAction action)
         {
         }
@@ -18,6 +22,10 @@ namespace BGS.Character
         {
             if (DialogueManager.Instance.Interacting) { return; }
             DialogueManager.Instance.HandleDialogue(_dialogue, this);
+        }
+
+        public virtual void PreInteraction()
+        {
         }
     }
 }

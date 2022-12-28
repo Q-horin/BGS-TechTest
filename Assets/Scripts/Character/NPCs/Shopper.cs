@@ -1,4 +1,4 @@
-using System.Collections;
+
 using System.Collections.Generic;
 using UnityEngine;
 using BGS.UI;
@@ -15,17 +15,31 @@ namespace BGS.Character
         [SerializeField] private int _inventorySize;
         [SerializeField] private List<InventoryItem> _shopItems;
         [SerializeField] private CurrencyController _currencyController;
+        [SerializeField] private GameObject _hud;
         private bool _shopping;
         public override void Interact()
         {
             if (_shopping) { return; }
             base.Interact();
+            _hud.SetActive(false);
+        }
+
+        public override void ExitInteraction()
+        {
+            base.ExitInteraction();
+            _hud.SetActive(false);
+        }
+
+        public override void PreInteraction()
+        {
+            _hud.SetActive(true);
         }
 
         public override void HandleResponse(DialogueAction action)
         {
             if (!action.NeedsResponse) { return; }
             _shopUIManager = FindObjectOfType<ShopUIManager>();
+
             _shopUIManager.OpenShop(_shopItems, _inventorySize);
             _shopping = true;
         }

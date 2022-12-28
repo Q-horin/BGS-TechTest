@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 17517307
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.8207547, g: 0.4761926, b: 0.4761926, a: 1}
@@ -225,4 +225,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44e0e3c8c380bfc42bb12493419c9614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fund: 0
+  _funds: 200
+  FundsUpdatedEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: BGS.UI.CurrencyUI, Assembly-CSharp
+        m_MethodName: SetFunds
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
