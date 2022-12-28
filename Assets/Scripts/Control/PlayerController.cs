@@ -11,11 +11,13 @@ namespace BGS.Core
         [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private Collider2D _interactiveCollider;
         [SerializeField] private float _movementSpeed;
+        [SerializeField] private Animator _animator;
 
         private IInteractable _interactable;
         private Vector2 _moveDir;
         float _xValue;
         float _yValue;
+        bool _isIdle;
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
@@ -30,6 +32,7 @@ namespace BGS.Core
             _interactable.ExitInteraction();
             _interactable = null;
         }
+
         void Update()
         {
             HandleMovementInput();
@@ -39,6 +42,12 @@ namespace BGS.Core
                 if (_interactable == null) { return; }
                 _interactable.Interact();
             }
+        }
+
+
+        public void ReplaceRuntimeAnimatorController(AnimatorOverrideController aoc)
+        {
+            _animator.runtimeAnimatorController = aoc;
         }
 
         private void HandleMovementInput()
@@ -62,13 +71,26 @@ namespace BGS.Core
             {
                 _yValue = 1f;
             }
+            _isIdle = _xValue == 0 && _yValue == 0;
 
             _moveDir = new Vector2(_xValue, _yValue).normalized;
         }
 
         private void FixedUpdate()
         {
-            _rigidbody2D.velocity = _moveDir * _movementSpeed;
+            if (_isIdle)
+            {
+                _rigidbody2D.velocity = Vector2.zero;
+                _animator.SetBool("isMoving", false);
+                return;
+            }
+            else if (!_isIdle)
+            {
+                _rigidbody2D.velocity = _moveDir * _movementSpeed;
+                _animator.SetBool("isMoving", true);
+                _animator.SetFloat("horizontalMovement", _moveDir.x);
+                _animator.SetFloat("verticalMovement", _moveDir.y);
+            }
         }
     }
 }
