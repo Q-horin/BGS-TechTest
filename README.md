@@ -19,5 +19,5 @@ I don’t think that I can explain the systems functionally in only up to 300 wo
 Regarding how well I think I did, I'm actually happy with it. Since I did not get the proper asset that I was looking for the character (meaning a properly rigged character so clothes could be easily changed by changing just the sprite from the proper sprite renderer) the "Equipment system" is quite limited and hardcoded/hacked to be functional to the exercise. I realized too late that we, argentinians, cannot use credit cards on paypal so I couldn't get the assets that I was counting on, and since I left the aesthetics/visuals for the last day I was really crushed with this situation and I had to improvise.
 That being said, is a functional MVP although there is a lot of work/polish to do.
  
-Cheers
+ Cheers,
 **Leandro.**  
