@@ -20,4 +20,4 @@ Regarding how well I think I did, I'm actually happy with it. Since I did not ge
 That being said, is a functional MVP although there is a lot of work/polish to do.
  
 Cheers,
-Leandro.  
+**Leandro.**  
