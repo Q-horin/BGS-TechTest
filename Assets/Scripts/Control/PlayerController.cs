@@ -18,6 +18,7 @@ namespace BGS.Core
         float _xValue;
         float _yValue;
         bool _isIdle;
+        private bool _enableController = true;
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
@@ -35,6 +36,8 @@ namespace BGS.Core
 
         void Update()
         {
+            if(!_enableController) { return; }
+
             HandleMovementInput();
 
             if (Input.GetKey(KeyCode.E))
@@ -44,7 +47,10 @@ namespace BGS.Core
             }
         }
 
-
+        public void EnableController(bool enable)
+        {
+            _enableController = enable;
+        }
         public void ReplaceRuntimeAnimatorController(AnimatorOverrideController aoc)
         {
             _animator.runtimeAnimatorController = aoc;
