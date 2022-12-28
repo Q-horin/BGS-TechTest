@@ -21,10 +21,13 @@ namespace BGS.Core
         {
              if (!collision.gameObject.TryGetComponent<IInteractable>(out IInteractable interactable)) { return; }
              _interactable = interactable;
+            _interactable.PreInteraction();
         }
 
         private void OnCollisionExit2D(Collision2D collision)
         {
+            if (_interactable == null) { return; }
+            _interactable.ExitInteraction();
             _interactable = null;
         }
         void Update()

@@ -80,6 +80,11 @@ namespace BGS.UI
         {
             _uiContainer.SetActive(false);
         }
+
+        public void OpenUI()
+        {
+            _uiContainer.SetActive(true);
+        }
     }
 }
 //EOF.

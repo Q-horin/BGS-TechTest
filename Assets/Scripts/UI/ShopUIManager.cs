@@ -3,6 +3,7 @@ using UnityEngine;
 using BGS.Inventory;
 using BGS.Character;
 using BGS.Core;
+using UnityEngine.Events;
 
 namespace BGS.UI
 {
@@ -17,6 +18,7 @@ namespace BGS.UI
         private CurrencyController _player;
         private int _inventorySize;
 
+        public UnityEvent OnOpenShopEvent;
         private void PopulateShopItems(List<InventoryItem> items)
         {
             if (items.Count > _inventorySize) { return; }
@@ -62,6 +64,7 @@ namespace BGS.UI
             _uiContainer.SetActive(true);
             _shopper = FindObjectOfType<Shopper>();
             _player = FindObjectOfType<PlayerController>().GetComponent<CurrencyController>();
+            OnOpenShopEvent?.Invoke();
         }
 
         public void CloseShop()
